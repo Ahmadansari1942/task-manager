@@ -1,8 +1,30 @@
+# Dependencies
 node_modules/
+npm-debug.log*
+
+# Environment variables
 .env
 .env.local
+.env.production
+
+# Build outputs
+frontend/build/
+dist/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Keys
 *.pem
 *.key
-frontend/build/
-.DS_Store
-npm-debug.log*
+
+# Logs
+*.log
+
+# PM2
+.pm2/
