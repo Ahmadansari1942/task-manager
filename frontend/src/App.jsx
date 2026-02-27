@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://3.110.31.247:5000/api';
+const API_URL = process.env.REACT_APP_API_URL || 'http://3.110.31.247:5000/api/tasks';
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -17,7 +17,7 @@ function App() {
   const fetchTasks = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${API_URL}/tasks`);
+      const response = await fetch(`${API_URL}`);
       if (!response.ok) throw new Error('Failed to fetch tasks');
       const data = await response.json();
       setTasks(data);
@@ -34,7 +34,7 @@ function App() {
     if (!newTask.title.trim()) return;
 
     try {
-      const response = await fetch(`${API_URL}/tasks`, {
+      const response = await fetch(`${API_URL}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newTask)
@@ -52,7 +52,7 @@ function App() {
   const updateTaskStatus = async (id, newStatus) => {
     try {
       const task = tasks.find(t => t.id === id);
-      const response = await fetch(`${API_URL}/tasks/${id}`, {
+      const response = await fetch(`${API_URL}/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...task, status: newStatus })
@@ -67,7 +67,7 @@ function App() {
 
   const deleteTask = async (id) => {
     try {
-      const response = await fetch(`${API_URL}/tasks/${id}`, {
+      const response = await fetch(`${API_URL}/${id}`, {
         method: 'DELETE'
       });
       
